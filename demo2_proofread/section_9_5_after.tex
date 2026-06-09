@@ -1,0 +1,79 @@
+\subsection{Interpretation and caveats}
+\label{subsec:interpretation}
+
+The three predictions divide the four metrics cleanly. Distinctiveness
+and entropy carry no independent growth signal once MA is controlled
+for. Both move with MA in Section~\ref{sec:results} and stop mattering
+on the growth side, which is what new trade theory predicts. Total
+diversity carries a marginally positive growth signal, consistent with
+the Romer-Jacobs view that breadth of knowledge drives growth. The two
+Mokyr-relevant metrics behave the way the Mokyr channel predicts.
+Share-of-useful predicts growth on the extensive margin, driven by
+vernacular composition shifts. Within-useful diversity predicts growth
+on the intensive margin, driven by Latin scholarly depth. The
+cross-language asymmetry is not noise. It is what we would expect if
+the channel works through different print media for different
+audiences.
+
+Our findings refine the empirical print-and-growth literature on both
+margins. \citet{Dittmar2011_information_technology} and
+\citet{BoernerRubinSevergnini2021_eer} have shown that whether a city
+had a printing press predicts subsequent population growth between
+1500 and 1600. Our panel adds the compositional margin. What the
+press produced, particularly the share and depth of useful-knowledge
+content, predicts growth above and beyond whether a press existed.
+Our share-of-useful finding is the city-level, six-language,
+1450--1650 analogue of the volume-level, England-published, 1500--1900
+corpus-textual finding of \citet{AlmelhemIyigunKennedyRubin2026_qje}.
+In their LDA-based analysis of 264{,}443 volumes published in England
+in the HathiTrust Digital Library, the volumes that became most
+progress-oriented during the Enlightenment were those using language
+at the nexus of science and political economy, with
+industrial-flavoured works at that same nexus carrying the strongest
+signal. The Mokyr channel finds further empirical support in
+\citet{SquicciariniVoigtlander2015_qje}, who use subscriber lists for
+Diderot's \emph{Encyclop\'edie} as an upper-tail human capital proxy
+and show that they predict French city industrialisation a century
+later. Their proxy operates on the demand side, ours on the supply
+side. The timing of our growth signal also aligns with the
+productivity-growth chronology of
+\citet{BouscasseNakamuraSteinsson2025_qje}, who estimate that English
+productivity growth accelerated around 1600, bracketed by our 1450 and
+1650 panel endpoints.
+
+The magnitudes are small. A one-standard-deviation increase in
+share-of-useful is associated with about a 1.5 log-point increase in
+50-year city growth.
+
+The growth channel may also operate at a longer horizon than the
+1450--1650 window suggests. Our reduced-form panel cannot distinguish
+equilibrium-conditioned composition coefficients from causal ones, and
+the Krugman cumulative-causation dynamics in
+\citet{Krugman1991_geography_jpe} explicitly play out over centuries
+rather than single 50-year windows. A positive 50-year correlation
+could therefore overstate or understate the structural channel.
+
+The Thirty Years' War (1618--1648) shapes the 1600--1650 growth window
+for German-territory cities. Appendix~\ref{app:war} reports the
+sensitivity, and both Section~\ref{sec:results} composition signals
+and Section~\ref{sec:growth} diversity-on-growth strengthen once
+war-affected observations are removed.
+
+We do not claim a single channel explains every coefficient. Italian
+print shows a significantly negative growth coefficient on diversity
+($-0.251^{**}$, Table~\ref{tab:section9_main}) that runs against the
+pooled positive, plausibly reflecting the outsized weight of Venezia
+in the Italian-print panel (35\% of all Italian titles, see
+Section~\ref{sec:geography}) over a period in which Venezia's own
+economic position weakened.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{../Figures/fig_growth_coefs.pdf}
+  \caption{Pooled Barro long-difference coefficients of
+    $\Delta_{50}\log(\pop)$ on each composition metric, conditional on
+    $\log(\MA)$ and $\log(\pop)$, under the full sample and the
+    war-restricted sample. 95\% confidence intervals; dashed vertical
+    line at zero. Full regression table in Appendix
+    Table~\ref{tab:section9_main}.}
+  \label{fig:growth_coefs}

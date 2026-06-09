@@ -1,0 +1,18 @@
+Read section_9_5_before.tex.
+
+This is a passage of academic prose drafted by AI. It has the standard
+AI tells: em-dash parenthetical triplets, rhetorical colons, the
+"Caveats are in order. (i)…(iv)" enumeration, and "supported at
+conventional significance through two distinct margins:" abstract
+jargon.
+
+Scan it and propose edits to remove the AI tells. For each proposed
+change, give me:
+
+- Line number
+- Current text (one quoted line)
+- Proposed text (one quoted line)
+- A one-line reason
+
+Do not apply the changes yet. Give me the list first, then I'll tell
+you which to apply.

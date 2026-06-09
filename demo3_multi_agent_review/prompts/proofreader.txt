@@ -1,0 +1,12 @@
+Spawn the proofreader sub-agent. Have it produce a Markdown report
+covering: grammar (subject-verb agreement, missing commas, dangling
+modifiers); typos; consistency (notation, citation style, terminology);
+academic-prose quality; LaTeX hygiene visible from text. For each
+finding, report line number, current text, proposed fix, and severity
+(HIGH/MEDIUM/LOW). Read-and-report only — no edits.
+
+Target file: Paper/sections/08_results.tex (Section 8 — Results).
+
+Keep the report under ~120 lines so a presenter can walk through it in
+60 seconds. Group findings by severity. Return the full Markdown report
+as the final response.

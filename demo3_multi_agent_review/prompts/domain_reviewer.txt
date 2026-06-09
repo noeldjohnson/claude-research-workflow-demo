@@ -1,0 +1,20 @@
+Spawn the domain-reviewer sub-agent. Have it review the manuscript
+section for substantive correctness across five lenses:
+  1. Assumptions — is each interpretive claim covered by the framework
+     assumptions it invokes?
+  2. Derivation — do the coefficient signs and magnitudes match the
+     framework's predictions?
+  3. Citations — are the cited works' arguments correctly represented?
+  4. Code-theory alignment — do the empirical estimates plausibly match
+     what the theoretical predictions entail?
+  5. Logical consistency — internally coherent, no contradicted claims?
+
+For each finding, report location, the substantive issue, severity
+(CRITICAL / MAJOR / MINOR), and suggested action. Cross-reference
+related sections as needed.
+
+Target file: Paper/sections/08_results.tex.
+
+Keep the report under ~120 lines. Group findings by severity. End with
+a lens-by-lens summary. Return the full Markdown report as the final
+response.

@@ -5,20 +5,28 @@
 same section in parallel — substance, proofreading, citations — and
 each one writes a report you can act on.
 
-**Cached.** The three reports were pre-run against §8 on 2026-06-09
-and live under `cached_reports/`. During the demo you "run" the
-commands (which appear to execute instantly) and the cached files
-appear.
+**Cached.** The three reports were pre-run against §8 of a working
+paper on 2026-06-09 and live under `cached_reports/`. During the demo
+you "run" the commands (which appear to execute instantly) and the
+cached files appear.
+
+> **Replicating this on your own project.** The reports below were
+> generated against a specific working manuscript. To run the same
+> review on your own work, substitute your manuscript paths everywhere
+> the cached reports or prompts reference `Paper/sections/08_results.tex`
+> or `Bibliography_draft.bib`. The pattern is the demo, not the
+> specific file paths.
 
 ---
 
-## Pre-talk setup
+## Pre-talk setup (Noel-specific)
 
-1. Copy the three cached reports into the real project's
-   `quality_reports/` directory the day before the talk:
+1. Copy the three cached reports into a working directory the
+   audience can see when the demo runs (in Noel's case, the project's
+   `quality_reports/`):
    ```bash
    cp demo_assets/demo3_multi_agent_review/cached_reports/section_8_*.md \
-      quality_reports/
+      <your_working_directory>/
    ```
 2. Confirm they're visible there.
 3. Have the prompts (`prompts/*.txt`) open in tabs so you can show
@@ -53,9 +61,12 @@ In the Claude session, type or paste:
 
 ```
 Run /validate-bib and spawn the proofreader and domain-reviewer
-sub-agents in parallel on Paper/sections/08_results.tex. Save each
-report to quality_reports/section_8_<agent>.md.
+sub-agents in parallel on <your_manuscript_section>. Save each
+report to <your_review_directory>/<section_name>_<agent>.md.
 ```
+
+(In the live talk, Noel substitutes `Paper/sections/08_results.tex`
+and `quality_reports/section_8_<agent>.md` for the placeholders.)
 
 Because the reports are pre-staged, the files appear "instantly".
 

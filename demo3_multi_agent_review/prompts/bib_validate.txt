@@ -1,8 +1,8 @@
 Run the /validate-bib skill. It will:
 
-  1. Extract every citation key in Bibliography_draft.bib (or
-     Bibliography_base.bib).
-  2. Scan Paper/main.tex and Paper/sections/*.tex for every \cite, \citet,
+  1. Extract every citation key from your project's .bib file
+     (path configured per-project; the skill is repository-aware).
+  2. Scan your manuscript .tex files for every \cite, \citet,
      \citep, \citeauthor, \citeyear key.
   3. Report:
      - Missing entries (cited but not in bib) — CRITICAL
@@ -10,4 +10,10 @@ Run the /validate-bib skill. It will:
      - Potential typos (similar but non-matching keys)
      - Malformed bib entries
 
-The skill is repository-aware. No arguments needed beyond the trigger.
+The skill needs no arguments — it reads its targets from the
+project's own configuration. Set up the .bib path and the manuscript
+folder in your CLAUDE.md or a project-level config so /validate-bib
+knows where to look.
+
+(Talk example: the Mercatus demo runs this against a working paper
+with Bibliography_draft.bib and Paper/sections/*.tex.)

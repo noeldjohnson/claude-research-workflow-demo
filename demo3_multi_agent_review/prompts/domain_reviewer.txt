@@ -13,7 +13,10 @@ For each finding, report location, the substantive issue, severity
 (CRITICAL / MAJOR / MINOR), and suggested action. Cross-reference
 related sections as needed.
 
-Target file: Paper/sections/08_results.tex.
+Target file: <path/to/your/manuscript_section.tex>
+
+(Talk example: the Mercatus demo runs this against §8 of a working
+paper. Substitute the file in your own project that you want reviewed.)
 
 Keep the report under ~120 lines. Group findings by severity. End with
 a lens-by-lens summary. Return the full Markdown report as the final

@@ -80,7 +80,7 @@ against §8 of the paper.
 ## Folder structure
 
 ```
-demo_assets/
+.
 ├── README.md                              ← this file
 ├── demo1_setup/
 │   ├── CLAUDE.md                          ← project instructions
@@ -92,17 +92,32 @@ demo_assets/
 │   ├── section_9_5_after.tex              ← reference (what the loop produces)
 │   ├── prompt.txt                         ← prompt to Claude
 │   └── walkthrough.md
-└── demo3_multi_agent_review/
-    ├── prompts/
-    │   ├── proofreader.txt                ← spawn the proofreader
-    │   ├── domain_reviewer.txt            ← spawn the domain-reviewer
-    │   └── bib_validate.txt               ← run /validate-bib
-    ├── cached_reports/                    ← pre-run reports for the demo
-    │   ├── section_8_proofreader.md
-    │   ├── section_8_domain.md
-    │   └── section_8_bib_validate.md
-    └── walkthrough.md
+├── demo3_multi_agent_review/
+│   ├── prompts/
+│   │   ├── proofreader.txt                ← spawn the proofreader
+│   │   ├── domain_reviewer.txt            ← spawn the domain-reviewer
+│   │   └── bib_validate.txt               ← run /validate-bib
+│   ├── cached_reports/                    ← pre-run reports for the demo
+│   │   ├── section_8_proofreader.md
+│   │   ├── section_8_domain.md
+│   │   └── section_8_bib_validate.md
+│   └── walkthrough.md
+└── cheatsheets/
+    ├── skills_vs_agents.pdf               ← printable Q&A reference
+    └── skills_vs_agents.tex
 ```
+
+---
+
+## Cheatsheets
+
+Printable Q&A references that pair with the demos.
+
+- [`cheatsheets/skills_vs_agents.pdf`](cheatsheets/skills_vs_agents.pdf)
+  --- two-page reference covering what a Claude Code skill is, what a
+  sub-agent is, why both are necessary, the four agents and twelve
+  skills currently defined in this project's workflow, two worked
+  examples, and three verbal anchors.
 
 ---
 

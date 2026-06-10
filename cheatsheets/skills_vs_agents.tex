@@ -1,0 +1,133 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper, margin=0.6in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.35em}
+\renewcommand{\arraystretch}{1.15}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{}
+\titlespacing*{\section}{0pt}{0.6em}{0.3em}
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Q\&A cheat sheet --- skills vs.\ agents}\\
+\smallskip
+{\footnotesize Mercatus, 2026-06-09. \quad What's the difference, why both, and what's actually in this workflow.}
+\end{center}
+
+\hrule
+\vspace{0.5em}
+
+\section*{The one-sentence difference}
+
+A \textbf{skill} is a Markdown checklist you trigger with a slash command, run by the Claude you're already talking to. An \textbf{agent} is a fresh Claude instance you spawn with its own focused context and persona, to which you delegate a self-contained task.
+
+\section*{Skills}
+
+\textbf{What:} a folder of plain-Markdown files at \texttt{.claude/skills/<name>/SKILL.md} that defines a multi-step procedure or checklist.\\
+\textbf{How invoked:} the user types \texttt{/<skill-name>}.\\
+\textbf{Where it runs:} in the main conversation, with the same Claude session you've been talking to.\\
+\textbf{Best for:} repeatable workflows, codified protocols, quick shortcuts. ``How to compile this paper.'' ``How to validate the bibliography.'' ``How to commit, PR, and merge.''\\
+\textbf{Cost:} tokens consume the main conversation's context window.
+
+\section*{Agents}
+
+\textbf{What:} a folder of Markdown files at \texttt{.claude/agents/<name>.md} that defines a sub-agent with a persona, a tool allowlist, and a system prompt.\\
+\textbf{How invoked:} the main Claude calls the \texttt{Agent} tool, which spawns a new Claude instance with an isolated context.\\
+\textbf{Where it runs:} a separate conversation. The sub-agent does its work, returns one final message, then disappears.\\
+\textbf{Best for:} focused single-purpose review, deep judgement calls, parallel work, anything that would pollute the main context with raw output.\\
+\textbf{Cost:} cheaper to the main context, but each agent run is its own Claude session.
+
+\section*{Why you need both (four reasons)}
+
+\begin{itemize}[leftmargin=1.4em, itemsep=0.15em]
+  \item \textbf{Context hygiene.} A bibliography scan reads every \texttt{.tex} file in the manuscript. If that ran in your main session, your context would fill with raw bib entries. As an agent it stays clean.
+  \item \textbf{Persona isolation.} The proofreader and the domain reviewer want different headspaces. Each agent gets its own system prompt and behaves like a different specialist. Skills don't change persona.
+  \item \textbf{Parallelism.} You can spawn three agents on the same section simultaneously. Skills run one at a time in the main thread.
+  \item \textbf{Workflow vs.\ judgement.} \texttt{/compile-latex} is three deterministic shell commands; that wants a skill. ``Did I represent Krugman accurately?'' is judgement; that wants an agent.
+\end{itemize}
+
+\section*{Agents currently in this workflow (4)}
+
+\begin{tabular}{l p{0.74\textwidth}}
+\toprule
+Agent & What it does\\
+\midrule
+\texttt{proofreader}      & Grammar, typos, consistency, LaTeX hygiene visible from text. Read-only.\\
+\texttt{domain-reviewer}  & Substantive review --- derivation correctness, assumption sufficiency, citation fidelity, code-theory alignment, logical consistency.\\
+\texttt{r-reviewer}       & R code quality, reproducibility, figure-generation patterns, project theme compliance.\\
+\texttt{verifier}         & End-to-end verification --- does the manuscript compile, do the R scripts run, are the output files non-empty.\\
+\bottomrule
+\end{tabular}
+
+\section*{Skills currently in this workflow (12)}
+
+\begin{tabular}{l p{0.72\textwidth}}
+\toprule
+Skill & What it does\\
+\midrule
+\multicolumn{2}{l}{\textit{Build / verify}}\\
+\quad \texttt{/compile-latex}     & 3-pass XeLaTeX + bibtex on \texttt{Paper/main.tex}.\\
+\quad \texttt{/validate-bib}      & Cross-reference \texttt{\textbackslash cite\{\}} keys against the .bib file.\\
+\quad \texttt{/commit}            & Stage, commit, push, open PR, merge.\\
+\multicolumn{2}{l}{\textit{Review (skills that invoke the agents above)}}\\
+\quad \texttt{/proofread}         & Runs the proofreading protocol on the manuscript.\\
+\quad \texttt{/review-paper}      & Comprehensive manuscript review --- argument, methods, citations, referee objections.\\
+\quad \texttt{/review-r}          & R code review protocol on scripts.\\
+\multicolumn{2}{l}{\textit{Research / writing workflows}}\\
+\quad \texttt{/lit-review}        & Structured literature search and synthesis with citation extraction.\\
+\quad \texttt{/research-ideation} & Generate testable hypotheses and empirical strategies from a topic.\\
+\quad \texttt{/interview-me}      & Interactive interview to formalise a research idea into a spec.\\
+\quad \texttt{/data-analysis}     & End-to-end R analysis from exploration through publication-ready tables.\\
+\multicolumn{2}{l}{\textit{Project meta}}\\
+\quad \texttt{/context-status}    & Show current context usage and session health.\\
+\quad \texttt{/learn}             & Extract reusable knowledge from this session into a new skill.\\
+\bottomrule
+\end{tabular}
+
+\section*{Two concrete examples of skills + agents working together}
+
+\textbf{Example 1: gating a section before commit.}
+
+\begin{enumerate}[leftmargin=1.5em, itemsep=0.05em, label=\arabic*.]
+  \item Finish drafting \texttt{Paper/sections/09\_growth.tex}.
+  \item In the main session: type \texttt{/review-paper}.
+  \item The skill spawns the proofreader and domain-reviewer agents in parallel against the section.
+  \item Each agent runs in its own context and returns a Markdown report to the main session.
+  \item I read the two reports, decide which findings to act on, and edit accordingly.
+  \item Type \texttt{/validate-bib} (skill, runs in main context --- it's just a regex sweep).
+  \item Type \texttt{/compile-latex} (skill, runs the three shell commands).
+  \item Type \texttt{/commit} (skill, stages and pushes).
+\end{enumerate}
+The two agents catch judgement-calls; the four skills handle deterministic workflow.
+
+\medskip
+
+\textbf{Example 2: when you'd use an agent vs.\ a skill for the same task.}
+
+``Check the bibliography.''
+
+\begin{itemize}[leftmargin=1.4em, itemsep=0.05em]
+  \item \textbf{As a skill} (\texttt{/validate-bib}): regex extracts every \texttt{\textbackslash cite\{\}} key, compares to the .bib, reports missing/unused entries. Deterministic. Runs in 5 seconds in the main context.
+  \item \textbf{As an agent} (substance-review): reads the .bib entries, checks whether each citation in the text accurately represents what the cited work actually argues. Judgement-heavy. Wants its own context.
+\end{itemize}
+Same surface task, two different jobs. Skill catches the mechanical gap (Smith1776\_wealth is in the text but not in the bib). Agent catches the substantive gap (you cited Krugman 1979 for a claim Krugman 1991 actually makes).
+
+\vspace{0.4em}
+\hrule
+\vspace{0.4em}
+
+\section*{Three verbal anchors}
+
+\begin{itemize}[leftmargin=1.4em, itemsep=0.15em]
+  \item \textit{Skill in one sentence:} ``A slash command that runs a checklist I wrote down, in the conversation I'm already in.''
+  \item \textit{Agent in one sentence:} ``A fresh Claude with its own persona and context that I delegate a focused task to, and which sends one report back.''
+  \item \textit{Why both:} ``Skills are deterministic workflow. Agents are judgement that wants its own headspace. The first stops me typing the same three commands every time. The second catches things a single Claude session would miss because it's juggling too much.''
+\end{itemize}
+
+\end{document}
